@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	db "github.com/waku-org/go-libp2p-rendezvous/db"
-	pb "github.com/waku-org/go-libp2p-rendezvous/pb"
+	db "github.com/snapclawchat/go-libp2p-rendezvous/db"
+	pb "github.com/snapclawchat/go-libp2p-rendezvous/pb"
 
 	logging "github.com/ipfs/go-log/v2"
 	crypto "github.com/libp2p/go-libp2p/core/crypto"

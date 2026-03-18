@@ -14,9 +14,9 @@ import (
 	"github.com/libp2p/go-msgio/pbio"
 	"github.com/stretchr/testify/require"
 
-	db "github.com/waku-org/go-libp2p-rendezvous/db/sqlite"
-	pb "github.com/waku-org/go-libp2p-rendezvous/pb"
-	"github.com/waku-org/go-libp2p-rendezvous/test_utils"
+	db "github.com/snapclawchat/go-libp2p-rendezvous/db/sqlite"
+	pb "github.com/snapclawchat/go-libp2p-rendezvous/pb"
+	"github.com/snapclawchat/go-libp2p-rendezvous/test_utils"
 )
 
 func getRendezvousHosts(t *testing.T, ctx context.Context, m mocknet.Mocknet, n int) []host.Host {

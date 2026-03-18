@@ -9,7 +9,7 @@ import (
 	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
 
 	"github.com/libp2p/go-libp2p/core/host"
-	"github.com/waku-org/go-libp2p-rendezvous/test_utils"
+	"github.com/snapclawchat/go-libp2p-rendezvous/test_utils"
 )
 
 func getRendezvousClients(t *testing.T, hosts []host.Host) []RendezvousClient {

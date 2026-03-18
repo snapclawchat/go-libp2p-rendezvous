@@ -6,8 +6,8 @@ import (
 	"github.com/libp2p/go-libp2p/core/peer"
 	"github.com/libp2p/go-msgio/pbio"
 
-	db "github.com/waku-org/go-libp2p-rendezvous/db"
-	pb "github.com/waku-org/go-libp2p-rendezvous/pb"
+	db "github.com/snapclawchat/go-libp2p-rendezvous/db"
+	pb "github.com/snapclawchat/go-libp2p-rendezvous/pb"
 )
 
 const (
