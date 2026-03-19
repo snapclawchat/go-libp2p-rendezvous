@@ -138,3 +138,13 @@ go test -race ./...
 - `db/sqlite`: plain SQLite for local/non-encrypted use cases.
 - `db/sqlcipher`: SQLCipher (requires environment support) for encrypted-at-rest use cases.
 
+### Can I use a pure-Go sqlite driver?
+
+Yes. `db/sqlite` now supports explicit driver selection:
+
+```go
+db, err := sqlite.OpenDBWithDriver(ctx, ":memory:", sqlite.SQLiteDriverModernc) // pure-go
+```
+
+The default `sqlite.OpenDB` behavior is unchanged and uses `sqlite.SQLiteDriverMattn`.
+

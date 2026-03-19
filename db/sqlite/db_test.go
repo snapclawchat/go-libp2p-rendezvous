@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"math/rand"
+	"strings"
 	"testing"
 	"time"
 
@@ -48,6 +49,31 @@ func TestOpenCloseMemDB(t *testing.T) {
 	err = db.Close()
 	if err != nil {
 		t.Fatal(err)
+	}
+}
+
+func TestOpenCloseMemDBModernc(t *testing.T) {
+	db, err := OpenDBWithDriver(context.Background(), ":memory:", SQLiteDriverModernc)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// let the flush goroutine run its cleanup act
+	time.Sleep(1 * time.Second)
+
+	err = db.Close()
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestOpenDBWithDriverRejectsUnsupportedDriver(t *testing.T) {
+	_, err := OpenDBWithDriver(context.Background(), ":memory:", "unknown-driver")
+	if err == nil {
+		t.Fatal("expected unsupported driver error")
+	}
+	if !strings.Contains(err.Error(), "unsupported sqlite driver") {
+		t.Fatalf("unexpected error: %v", err)
 	}
 }
 

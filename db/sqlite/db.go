@@ -13,13 +13,18 @@ import (
 
 	dbi "github.com/kaleidra/go-libp2p-rendezvous/db"
 
-	_ "github.com/mattn/go-sqlite3"
-
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/libp2p/go-libp2p/core/peer"
 )
 
 var log = logging.Logger("rendezvous/db")
+
+const (
+	// SQLiteDriverMattn uses github.com/mattn/go-sqlite3 (cgo-based).
+	SQLiteDriverMattn = "sqlite3"
+	// SQLiteDriverModernc uses modernc.org/sqlite (pure-go).
+	SQLiteDriverModernc = "sqlite"
+)
 
 type DB struct {
 	db *sql.DB
@@ -41,6 +46,16 @@ type DB struct {
 }
 
 func OpenDB(ctx context.Context, path string) (*DB, error) {
+	return OpenDBWithDriver(ctx, path, SQLiteDriverMattn)
+}
+
+func OpenDBWithDriver(ctx context.Context, path string, driver string) (*DB, error) {
+	switch driver {
+	case SQLiteDriverMattn, SQLiteDriverModernc:
+	default:
+		return nil, fmt.Errorf("unsupported sqlite driver %q (supported: %q, %q)", driver, SQLiteDriverMattn, SQLiteDriverModernc)
+	}
+
 	var create bool
 	if path == ":memory:" {
 		create = true
@@ -54,7 +69,7 @@ func OpenDB(ctx context.Context, path string) (*DB, error) {
 		}
 	}
 
-	db, err := sql.Open("sqlite3", path)
+	db, err := sql.Open(driver, path)
 	if err != nil {
 		return nil, err
 	}
